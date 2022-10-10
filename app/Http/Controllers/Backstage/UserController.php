@@ -104,7 +104,7 @@ namespace App\Http\Controllers\Backstage;
                     $data['password'] = $data['password'];
                 }
             }
-
+            //dd(request());
             // Update the user
             $user->update($data);
 

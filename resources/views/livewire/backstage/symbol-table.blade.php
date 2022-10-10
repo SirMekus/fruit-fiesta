@@ -68,7 +68,7 @@
 
                         <input wire:model="photo" type="file" class="thunderbite-input" name="search" value="">
 
-                        @error('photo') <span class="error">{{ $message }}</span> @enderror
+                        @error('photo') <span class="invalid-feedback"><strong>{{ $message }}</strong></span> @enderror
 
                     </div>
                 </div>
@@ -80,7 +80,7 @@
 
                     <div class="col-span-3">
                         <input wire:model="point_3" type="number" class="thunderbite-input     " name="search" value="">
-                        @error('point_3') <span class="error">{{ $message }}</span> @enderror
+                        @error('point_3') <span class="invalid-feedback"><strong>{{ $message }}</strong></span> @enderror
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
 
                     <div class="col-span-3">
                         <input wire:model="point_4" type="number" class="thunderbite-input     " name="search" value="">
-                        @error('point_4') <span class="error">{{ $message }}</span> @enderror
+                        @error('point_4') <span class="invalid-feedback"><strong>{{ $message }}</strong></span> @enderror
                     </div>
                 </div>
 
@@ -102,7 +102,7 @@
 
                     <div class="col-span-3">
                         <input wire:model="point_5" type="number" class="thunderbite-input     " name="search" value="">
-                        @error('point_5') <span class="error">{{ $message }}</span> @enderror
+                        @error('point_5') <span class="invalid-feedback"><strong>{{ $message }}</strong></span> @enderror
                     </div>
                 </div>
 

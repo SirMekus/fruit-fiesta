@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($this->route()->user->id),
+                Rule::unique('users')->ignore(request()->user()->id),
             ],
             'level' => [
                 Rule::in(['admin', 'download', 'readonly']),
@@ -38,13 +38,18 @@ class UpdateRequest extends FormRequest
             'current_password' => [
                 'sometimes',
                 'nullable',
-                'password',
+                //'current_password',
                 'required_with:password'
             ],
             'password' => [
                 'required_with:current_password',
                 'nullable',
                 'confirmed',
+                'min:8',
+            ],
+            'password_confirmation' => [
+                'required_with:password',
+                'nullable',
                 'min:8',
             ],
         ];

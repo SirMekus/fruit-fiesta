@@ -60,7 +60,7 @@ class Matrix
         return $unique;
     }
 
-    public function calculatePoints(array $matrix): int|float
+    public function calculatePoints(array $matrix): array
     {
         $total = 0;
 
@@ -85,7 +85,7 @@ class Matrix
             }
         }
 
-        return $total;
+        return ['point'=>$total, 'symbol'=>$winning_symbols];
     }
 
     public function checkThreeMatches(array $matrix, array $needle): int|float
@@ -205,9 +205,7 @@ class Matrix
         if(($matrix[12]['id'] == $matrix[13]['id']) and ($matrix[13]['id'] == $matrix[9]['id']) and ($matrix[9]['id']== $needle['id'])){
             $point += $needle['three_match'];
         }
-
-        //dump("3 point: {$point}");
-
+        
         return $point;
     }
 
@@ -305,9 +303,7 @@ class Matrix
         and ($matrix[3]['id']== $matrix[4]['id'])){
             $point += $needle['three_match'];
         }
-
-        //dump("4 point: {$point}");
-
+        
         return $point;
     }
 
@@ -368,8 +364,6 @@ class Matrix
         and ($matrix[7]['id']== $matrix[3]['id']) and ($matrix[3]['id']== $matrix[4]['id'])){
             $point += $matched_point;
         }
-
-        //dump("5 point: {$point}");
 
         return $point;
     }

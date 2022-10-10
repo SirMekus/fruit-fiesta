@@ -46,15 +46,12 @@
             </div>
         </div>
     <div class="grid grid-cols-5 gap-4" id="game">
-
         <div id="card" class="bg-white shadow-lg mx-auto rounded-b-lg flex justify-center">
             <div class="px-10 pt-4 pb-8">
                 <h1>Game Arena</h1>
                 <p>Hello, {{ auth()->user()->name }}</p>
                 <p>Welcome on board!</p>
                 <p>Let's get started. Click on the "Spin" button below to start playing.</p>
-    
-    
             </div>
         </div>
     </div>

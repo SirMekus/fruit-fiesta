@@ -21,7 +21,7 @@ class SymbolChecker
         
         if($count < 6 or $count > 10)
         {
-            return redirect('backstage/')->with('status', "There should be a minimum of 6 and maximum of 10 symbols before we can launch the game.");
+            return redirect('backstage/')->with('status', "There should be a minimum of 6 and maximum of 10 symbols before you launch the game.");
         }
 
         return $next($request);

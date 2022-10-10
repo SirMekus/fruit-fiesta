@@ -45,16 +45,16 @@ class GameController extends Controller
         $point = $matrix->calculatePoints($result);
 
         if (session('point')){
-            session(['point' => session('point')+$point]);
+            session(['point' => session('point')+$point['point']]);
         }
         else{
-            session(['point' => $point]);
+            session(['point' => $point['point']]);
         }
 
         Spin::create([
             'user_id'=>request()->user()->id,
             'spin'=>$result,
-            'point'=>$point,
+            'point'=>$point['point'],
             'campaign_id'=>session('activeCampaign')
         ]);
 

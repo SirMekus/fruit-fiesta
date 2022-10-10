@@ -54,4 +54,9 @@ class Campaign extends Model
         // Return
         return $return;
     }
+
+    public function game()
+    {
+        return $this->hasMany(Game::class, 'campaign_id');
+    }
 }

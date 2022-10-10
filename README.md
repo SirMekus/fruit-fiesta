@@ -14,9 +14,13 @@ If you are not making use of Laravel Valet the below could differ a bit.
 1. Seed the database by running `php artisan db:seed`
 1. Run `npm install`
 1. Run `npm run dev`
+1. Run `php artisan storage:link`
+
 1. Visit http://thunderbite-backend-test.test/backstage and happy coding
 
 Login details: test@thunderbite.com / test123
+
+> Please note that for better experience the default Symbols created should be deleted and new symbols should be uploaded that truly contains image(s). This is because the service that Faker uses in generating images is down, thus no image will actually be generated which may affect the UI and UX of the game. 
 
 ## Test tasks
 

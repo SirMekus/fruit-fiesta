@@ -12,7 +12,7 @@
                                   'prize'=>"Search By Prize ID", 
                                   'hour_greater'=>"Search By Hour (greater)", 
                                   'hour_less'=>"Search By Hour (less)"], 
-                    'message' => null, 'value' =>  request()->filled('criteria') ? request()->criteria : null])
+                    'message' => null, 'value' => request()->filled('criteria') ? request()->criteria : null])
 
                     <div class="pt-5">
                         <input style="background:linear-gradient(0deg, rgba(81, 182, 255, 1) 0%, rgba(78, 147, 255, 1) 90%);" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" value="Search" type="submit"/>
@@ -25,6 +25,13 @@
 
                     @include('backstage.partials.tables.body')
                 </table>
+                @if($resource == 'games')
+                <div class="mt-5">
+                <button id="export" class="submit-button text-white font-bold py-4 px-4 rounded-full">
+                    Export As CSV
+                  </button>
+                </div>
+                @endif
             </div>
         </div>
     </div>

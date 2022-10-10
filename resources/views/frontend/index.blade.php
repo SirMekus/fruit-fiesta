@@ -39,8 +39,15 @@
 
 <body>
     <div class="container mx-auto px-8 relative z-10">
+        <div class="flex justify-end">
+            <div class="flex justify-between bg-black text-white hidden point-div">
+                <div>Point:</div>
+                <div id="point">0</div>
+            </div>
+        </div>
     <div class="grid grid-cols-5 gap-4" id="game">
-        <div id="card" class="bg-white shadow-lg mx-auto rounded-b-lg">
+
+        <div id="card" class="bg-white shadow-lg mx-auto rounded-b-lg flex justify-center">
             <div class="px-10 pt-4 pb-8">
                 <h1>Game Arena</h1>
                 <p>Hello, {{ auth()->user()->name }}</p>

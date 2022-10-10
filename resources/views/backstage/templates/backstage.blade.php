@@ -45,7 +45,7 @@
         <div class="col-span-6">
             @if($activeCampaign)
                 {{ $activeCampaign->name }}<br>
-                <a href="{{ url($activeCampaign->slug.'?a='.request()->user()->name.'&spins=4') }}" target="_blank" class="text-xs">{{ secure_url($activeCampaign->slug.'?a='.request()->user()->name.'&spins=4') }}</a>
+                <a href="{{ url($activeCampaign->slug.'?id='.request()->user()->id.'&spins=4') }}" target="_blank" class="text-xs">{{ secure_url($activeCampaign->slug.'?id='.request()->user()->id.'&spins=4') }}</a>
             @endif
         </div>
         <div class="col-span-6 text-right">
@@ -75,6 +75,15 @@
 @stack('js')
 
 <script>
+    @if (session('status'))
+    window.addEventListener("DOMContentLoaded", function () {
+    swal({
+            title: "Dear Player,",
+            text: "{{session('status')}}",
+            icon: "info",
+        })
+    })
+    @endif
     function showDeleteSwal(url, reload = false) {
         swal({
             title: "Are you sure you want to do this?",

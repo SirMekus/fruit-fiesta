@@ -37,4 +37,8 @@
     </a>
     @endif
     
+    <a href="{{ route('backstage.symbols') }}" class="@if( request()->segment(2) === 'symbols' ) active @endif mb-2 group flex items-center text-sm leading-5 font-medium text-gray-900 hover:text-gray-900 hover:no-underline focus:outline-none transition ease-in-out duration-150">
+        <span class="icon-holder"><i class="fa-solid fa-camera navigation-icon"></i></span>
+        <span class="text">Symbols</span>
+    </a>
 </nav>

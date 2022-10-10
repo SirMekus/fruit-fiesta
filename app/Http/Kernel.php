@@ -67,5 +67,8 @@ class Kernel extends HttpKernel
         // Thunderbite Middleware
         'setActiveCampaign' => \App\Http\Middleware\SetActiveCampaign::class,
         'redirectIfNoActiveCampaign' => \App\Http\Middleware\RedirectIfNoActiveCampaign::class,
+        'daily-spins' => \App\Http\Middleware\CheckDailySpins::class,
+        'symbol-checker' => \App\Http\Middleware\SymbolChecker::class,
+        'verify-campaign' => \App\Http\Middleware\VerifyCampaign::class,
     ];
 }

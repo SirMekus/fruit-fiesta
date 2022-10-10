@@ -23,6 +23,12 @@ class GameTable extends TableComponent
             ],
 
             [
+                'title' => 'point',
+                'attribute' => 'point',
+                'sort' => true,
+            ],
+
+            [
                 'title' => 'title',
                 'attribute' => 'title',
                 'sort' => true,

@@ -4,7 +4,7 @@
             <tr class="@if( ($key+1) % 2 === 0 ) alternate @endif">
                 @foreach($columns as $column)
                
-                    @if( $column['title'] !== 'tools' )
+                    @if( $column['title'] !== 'tools')
                         <td class="px-6 py-3 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
                             @if( isset($column['attribute']) )
                                 {{ $row->{$column['attribute']} }}
@@ -15,7 +15,7 @@
                             @elseif( isset($column['model']) )                             
                                     @php($modelname = $column['model'])                                
                                     @php($param = $column['param'])
-                                    @modelname($row, $modelname, $param)                                                                                                     
+                                    @modelname($row, $modelname, $param)
                             @else
                                 {{ $row->{$column['title']} ?? '' }}          
                             @endif

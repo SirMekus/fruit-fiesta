@@ -16,6 +16,10 @@ class Game extends Model
         'revealed_at',
     ];
 
+    protected $casts = [
+        'symbol' => 'array',
+    ];
+
     public static function filter()
     {
         $query = self::query();

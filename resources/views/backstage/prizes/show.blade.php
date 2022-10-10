@@ -4,31 +4,34 @@
 
     @if( auth()->user()->isAdmin() )
     <a href="{{ route('backstage.prizes.create') }}" class="button-create">Create prize</a>
-    <a href="{{ route('backstage.prizes.edit', $prize->customerlevel_id) }}" class="button-create">Edit prize</a>
+    <a href="{{ route('backstage.prizes.edit', $prize->id) }}" class="button-create">Edit prize</a>
     @endif
 @endsection
 
 @section('content')
     <div id="card" class="bg-white shadow-lg mx-auto rounded-b-lg">
         <div class="px-10 pt-4 pb-8">
-            @include('backstage.partials.views.text', [
+            @include('backstage.partials.forms.text', [
                 'label' => 'Customer Level',
-                'value' => $prize->customerlevel->name,
+                'field' => 'customer_level',
+                'value' => request()->user()->level,
             ])
 
-            @include('backstage.partials.views.text', [
+            @include('backstage.partials.forms.text', [
                 'label' => 'Redirect URL desktop',
+                'field' => 'redirect_desktop',
                 'value' => $prize->redirect_desktop,
             ])
 
-            @include('backstage.partials.views.text', [
+            @include('backstage.partials.forms.text', [
                 'label' => 'Redirect URL mobile',
+                'field' => 'redirect_mobile',
                 'value' => $prize->redirect_mobile,
             ])
 
             @includeWhen($activeCampaign->segmentation, 'backstage.partials.forms.select', [
                 'label' => 'Customer Segment',
-                'value' =>  $prize->customer_segmentation->name ?? '',
+                'value' =>  optional($prize->customer_segmentation)->name ?? '',
             ])
 
             @if( $prize->prizes->count() > 0)
@@ -41,10 +44,10 @@
                 </div>
                 @foreach ($prize->prizes as $value)
                     <div class="grid grid-cols-5 gap-4 items-start py-2 border-b border-gray-100">
-                        <div class="col-span-1">{{ $prize::$prizetype[$value->prize_type]}}</div>
+                        <div class="col-span-1">{{ $value->prize_type}}</div>
                         <div class="col-span-1">{{ $value->prizeamount}}</div>
                         <div class="col-span-1"><img src="{{env('DO_CDN_URL'). $value->popup_image }}" class="img-responsive w-16"  /> </div>
-                        <div class="col-span-1">{{ $value->getPointsBand($value->points_band)}}</div>
+                        <div class="col-span-1">{{ $value->points_band}}</div>
                         <div class="col-span-1">{{ $value->message }}</div>
                     </div>
                 @endforeach

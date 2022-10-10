@@ -67,11 +67,10 @@ window.addEventListener(
                                     game.appendChild(element);
                                 }
                             }
-                            document.querySelector(".point-div").children[1].innerHTML = result.point;
+                            document.querySelector(".point-div").children[1].innerHTML = result.point.point;
                         }
                     })
                     .catch((error) => {
-                        console.log(error.response.data.message )
                         if(!error.response.data.available){
                             document.querySelector(".point-div").classList.remove('hidden');
                         }

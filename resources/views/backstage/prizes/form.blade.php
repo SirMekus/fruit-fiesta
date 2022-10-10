@@ -7,6 +7,12 @@
 ])
 
 @include('backstage.partials.forms.text', [
+    'field' => 'title',
+    'label' => 'Title',
+    'value' => old('title') ?? $prize->title,
+])
+
+@include('backstage.partials.forms.text', [
     'field' => 'description',
     'label' => 'Description',
     'value' => old('description') ?? $prize->description,

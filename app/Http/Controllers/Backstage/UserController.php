@@ -42,8 +42,7 @@ namespace App\Http\Controllers\Backstage;
         {
             // Setup the data
             $data = $request->validated();
-            $password = Str::random(10);
-            $data['password'] = bcrypt($password);
+            $data['password'] = Str::random(10);
 
             // Create the user
             $user = User::create($data);
@@ -102,7 +101,7 @@ namespace App\Http\Controllers\Backstage;
                 if (auth()->user()->id !== $user->id) {
                     unset($data['password']);
                 } else {
-                    $data['password'] = bcrypt($data['password']);
+                    $data['password'] = $data['password'];
                 }
             }
 

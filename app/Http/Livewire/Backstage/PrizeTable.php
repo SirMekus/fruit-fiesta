@@ -17,6 +17,11 @@ class PrizeTable extends TableComponent
             ],
 
             [
+                'title' => 'title',
+                'sort' => true,
+            ],
+
+            [
                 'title' => 'level',
                 'sort' => true,
             ],
@@ -28,16 +33,18 @@ class PrizeTable extends TableComponent
 
             [
                 'title' => 'startDate',
+                'attribute' => 'starts_at',
                 'sort' => true,
             ],
 
             [
                 'title' => 'endDate',
+                'attribute' => 'ends_at',
                 'sort' => true,
             ],
         ];
 
-        if (auth()->user()->isAdmin()) {
+        if (request()->user()->isAdmin()) {
             $columns[] = [
                 'title' => 'tools',
                 'sort' => false,

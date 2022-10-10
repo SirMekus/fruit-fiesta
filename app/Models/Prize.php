@@ -14,6 +14,7 @@ class Prize extends Model
         'weight',
         'starts_at',
         'ends_at',
+        'title'
     ];
 
     protected $dates = ['created_at', 'updated_at', 'starts_at', 'ends_at'];

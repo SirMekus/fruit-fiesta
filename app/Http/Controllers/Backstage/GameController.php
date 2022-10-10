@@ -44,11 +44,22 @@ class GameController extends Controller
 
         $point = $matrix->calculatePoints($result);
 
-        if (session('point')){
-            session(['point' => session('point')+$point['point']]);
-        }
-        else{
-            session(['point' => $point['point']]);
+        if($point['point'] > 0){
+            $game = Game::where('account', request()->user()->name)->whereDate('created_at', carbon()->today())->first();
+
+            if(!empty($game)){
+                $new_point = $game->point+$point['point'];
+
+                $symbol = $game->symbol;
+
+                $symbol []= $point['symbol'];
+                
+                $game->symbol = $symbol;
+                
+                $game->point = $new_point;
+                
+                $game->save();
+            }
         }
 
         Spin::create([
@@ -69,16 +80,16 @@ class GameController extends Controller
         $fileName = 'games.csv';
 
         $games = Game::with(['prize','campaign'])
-        ->when(request()->criteria == 'account', function($query){
+        ->when(request()->search and request()->criteria == 'account', function($query){
             $query->where('account', 'like', request()->search.'%');
         })
-        ->when(request()->criteria == 'prize', function($query) {
+        ->when(request()->search and request()->criteria == 'prize', function($query) {
             $query->where('prize_id', request()->search);
         })
-        ->when(request()->criteria == 'hour_greater', function($query) {
+        ->when(request()->search and request()->criteria == 'hour_greater', function($query) {
             $query->whereRaw('HOUR(revealed_at) >= '.request()->search);
         })
-        ->when(request()->criteria == 'hour_less', function($query) {
+        ->when(request()->search and request()->criteria == 'hour_less', function($query) {
             $query->whereRaw('HOUR(revealed_at) <= '.request()->search);
         })->get();
 
@@ -90,7 +101,7 @@ class GameController extends Controller
                  "Expires"             => "0"
              ];
      
-        $columns = ['Account', 'Campaign', 'Prize', 'Weight', 'Title', 'REVEALED AT'];
+        $columns = ['Account', 'Campaign', 'Point', 'Prize', 'Weight', 'Title', 'REVEALED AT'];
      
         $callback = function() use($games, $columns) {
                  $file = fopen('php://output', 'w');
@@ -98,18 +109,19 @@ class GameController extends Controller
      
                  foreach ($games as $task) {
                      $row['Account']  = $task->account;
-                     $row['Campaign']  = $task->campaign->name;
-                     $row['Prize']    = $task->prize->name;
-                     $row['Weight']    = $task->prize->weight;
-                     $row['Title']    = $task->title;
-                     $row['REVEALED AT']  = $task->revealed_at;
+                     $row['Campaign'] = $task->campaign->name;
+                     $row['Point'] = $task->point;
+                     $row['Prize'] = optional($task->prize)->name;
+                     $row['Weight'] = optional($task->prize)->weight;
+                     $row['Title'] = optional($task->prize)->title;
+                     $row['REVEALED AT'] = $task->revealed_at;
      
-                     fputcsv($file, array($row['Account'], $row['Campaign'], $row['Prize'], $row['Weight'], $row['Title'], $row['REVEALED AT']));
+                     fputcsv($file, array($row['Account'], $row['Campaign'], $row['Point'], $row['Prize'], $row['Weight'], $row['Title'], $row['REVEALED AT']));
                  }
      
                  fclose($file);
              };
-     
+             
         return response()->stream($callback, 200, $headers);
     }
 
@@ -144,7 +156,12 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        //
+        $game = Game::where('id', $id)->first();
+        //dd($game->symbol);
+        return view('backstage.games.show', [
+            'game' => $game,
+
+        ]);
     }
 
     /**

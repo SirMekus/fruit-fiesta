@@ -8,17 +8,10 @@ class Matrix
 {
     public function createMatrix(int $column=5, int $row=3) : array
     {
-        $symbols = Symbol::limit(15)->inRandomOrder()->get()->toArray();
-
-        //dd($symbols->toArray());
+        $symbols = Symbol::limit(10)->inRandomOrder()->get()->toArray();
 
         $matrix= [];
 
-        // while(count($matrix) < $row){
-        //     $matrix [] = $symbol->random($column)->toArray();
-        // }
-        //dd(collect($matrix)->unique());
-    
         while(count($matrix) < $row){
             
             $matrix_column = [];
@@ -31,7 +24,6 @@ class Matrix
     
             $matrix [] = $matrix_column;
         }
-        //dd($matrix);
     
         return $matrix;
     }
@@ -73,14 +65,17 @@ class Matrix
         for($i=0;$i<count($unique);$i++){
             if($this->checkFiveMatches($combined, $unique[$i]) > 0){
                 $total += $this->checkFiveMatches($combined, $unique[$i]);
+                $unique[$i]['match'] = 5;
                 $winning_symbols []= $unique[$i];
             }
             else if($this->checkFourMatches($combined, $unique[$i]) > 0){
                 $total += $this->checkFourMatches($combined, $unique[$i]);
+                $unique[$i]['match'] = 4;
                 $winning_symbols []= $unique[$i];
             }
             else if($this->checkThreeMatches($combined, $unique[$i]) > 0){
                 $total += $this->checkThreeMatches($combined, $unique[$i]);
+                $unique[$i]['match'] = 3;
                 $winning_symbols []= $unique[$i];
             }
         }

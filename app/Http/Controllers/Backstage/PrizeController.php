@@ -45,6 +45,7 @@ class PrizeController extends Controller
         // Validation
         $data = $this->validate(request(), [
             'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'description' => 'sometimes',
             'weight' => 'required|numeric|between:0.01,99.99',
             'starts_at' => 'required|date_format:d-m-Y H:i:s',
@@ -56,7 +57,7 @@ class PrizeController extends Controller
         $data['campaign_id'] = session('activeCampaign');
 
         // Create the prize
-        $prize = Prize::create($data);
+        Prize::create($data);
 
         // Redirect with success message
         session()->flash('success', 'The prize has been created!');
@@ -70,8 +71,10 @@ class PrizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Prize $prize)
+    public function show($id)
     {
+        $prize = Prize::with('prizes')->where('id', $id)->first();
+        //dd($prize);
         return view('backstage.prizes.show', [
             'prize' => $prize,
 

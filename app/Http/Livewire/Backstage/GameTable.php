@@ -30,6 +30,7 @@ class GameTable extends TableComponent
 
             [
                 'title' => 'title',
+                'relationship' => 'prize',
                 'attribute' => 'title',
                 'sort' => true,
             ],
@@ -39,6 +40,12 @@ class GameTable extends TableComponent
                 'attribute' => 'revealed_at',
                 'sort' => true,
             ],
+
+            [
+                'title' => 'tools',
+                'sort' => false,
+                'tools' => ['show'],
+            ]
         ];
 
         return view('livewire.backstage.table', [
